@@ -163,4 +163,4 @@ cython_debug/
 .idea/
 
 # Excluding the Allure Results from the .gitignore
-!target/allure-results
+!tests/target/allure-results
