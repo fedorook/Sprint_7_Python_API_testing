@@ -1,6 +1,8 @@
 import requests
 import random
 from conftest import courier_data
+from config import BASE_URL, COURIER
+
 
 class TestCourierCreation:
     def test_create_courier_success(self, courier_data):
@@ -9,7 +11,7 @@ class TestCourierCreation:
             "password": 'test_password_' + str(random.randint(1, 100000)),
             "firstName": 'test_name_' + str(random.randint(1, 100000))
         }
-        response = requests.post('https://qa-scooter.praktikum-services.ru/api/v1/courier', data=data)
+        response = requests.post(f"{BASE_URL}{COURIER}", data=data)
         assert response.status_code == 201
         assert response.json() == {"ok": True}
 
@@ -20,7 +22,7 @@ class TestCourierCreation:
             "password": password,
             "firstName": first_name
         }
-        response = requests.post('https://qa-scooter.praktikum-services.ru/api/v1/courier', data=payload)
+        response = requests.post(f"{BASE_URL}{COURIER}", data=payload)
         assert response.status_code == 409
         assert response.json()['message'] == "Этот логин уже используется. Попробуйте другой."
 
@@ -30,6 +32,6 @@ class TestCourierCreation:
             "password": password,
             "firstName": first_name
         }
-        response = requests.post('https://qa-scooter.praktikum-services.ru/api/v1/courier', data=payload)
+        response = requests.post(f"{BASE_URL}{COURIER}", data=payload)
         assert response.status_code == 400
         assert "Недостаточно данных для создания учетной записи" in response.json()['message']

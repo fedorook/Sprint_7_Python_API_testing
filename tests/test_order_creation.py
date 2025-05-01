@@ -1,5 +1,6 @@
 import pytest
 import requests
+from config import BASE_URL, ORDER
 
 @pytest.mark.parametrize("color", [["BLACK"], ["GREY"], ["BLACK", "GREY"], []])
 def test_create_order_with_color(color):
@@ -14,6 +15,6 @@ def test_create_order_with_color(color):
         "comment": "Saske, come back to Konoha",
         "color": color
     }
-    response = requests.post('https://qa-scooter.praktikum-services.ru/api/v1/orders', json=order_data)
+    response = requests.post(f"{BASE_URL}{ORDER}", json=order_data)
     assert response.status_code == 201
     assert 'track' in response.json()
