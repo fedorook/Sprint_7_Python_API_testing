@@ -2,6 +2,8 @@ import requests
 import random
 import string
 
+BASE_URL = "https://qa-scooter.praktikum-services.ru/api/v1"
+
 # метод регистрации нового курьера возвращает список из логина и пароля
 # если регистрация не удалась, возвращает пустой список
 def register_new_courier_and_return_login_password():
@@ -37,3 +39,18 @@ def register_new_courier_and_return_login_password():
 
     # возвращаем список
     return login_pass
+
+
+def delete_courier(login: str, password: str):
+    # 1) залогиниться, чтобы получить id
+    resp = requests.post(
+        f"{BASE_URL}/courier/login",
+        json={"login": login, "password": password}
+    )
+    resp.raise_for_status()
+    courier_id = resp.json().get("id")
+
+    # 2) удалить курьера по id
+    del_resp = requests.delete(f"{BASE_URL}/courier/{courier_id}")
+    del_resp.raise_for_status()
+    return del_resp
