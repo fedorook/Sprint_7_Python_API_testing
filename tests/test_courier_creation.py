@@ -1,7 +1,7 @@
 import requests
 import random
 from conftest import courier_data
-from config import BASE_URL, COURIER
+from config import BASE_URL, COURIER, INSUFFICIENT_DATA_FOR_COURIER_CREATION, DUPLICATE_COURIER_LOGIN
 from utils import make_courier_payload
 
 
@@ -17,7 +17,7 @@ class TestCourierCreation:
         payload = make_courier_payload(login, password, first_name)
         response = requests.post(f"{BASE_URL}{COURIER}", data=payload)
         assert response.status_code == 409
-        assert response.json()['message'] == "Этот логин уже используется. Попробуйте другой."
+        assert response.json()["message"] == DUPLICATE_COURIER_LOGIN
 
     def test_create_courier_without_login(self, courier_data):
         _, password, first_name = courier_data
@@ -27,4 +27,4 @@ class TestCourierCreation:
         }
         response = requests.post(f"{BASE_URL}{COURIER}", data=payload)
         assert response.status_code == 400
-        assert "Недостаточно данных для создания учетной записи" in response.json()['message']
+        assert response.json()["message"] == INSUFFICIENT_DATA_FOR_COURIER_CREATION
