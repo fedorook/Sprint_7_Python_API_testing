@@ -1,0 +1,1 @@
+{"name": "test_login_missing_password_field", "status": "passed", "start": 1745773889826, "stop": 1745773931113, "uuid": "0fb5a1b6-77bc-41c3-a596-b96f817f5396", "testCaseId": "53bcbb86d8ae4489aaba976da2cc7a5b", "fullName": "tests.test_courier_login.TestCourierLogin#test_login_missing_password_field"}

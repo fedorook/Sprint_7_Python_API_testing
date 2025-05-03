@@ -1,0 +1,1 @@
+{"name": "test_create_order_with_color[color2]", "status": "passed", "parameters": [{"name": "color", "value": "['BLACK', 'GREY']"}], "start": 1745773987352, "stop": 1745773987571, "uuid": "903f5fb4-cdab-43f0-8bdb-c35d160d3bb8", "testCaseId": "05f4093de4eaf07c226059f7d29ec153", "fullName": "tests.test_order_creation#test_create_order_with_color"}
